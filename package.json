@@ -13,6 +13,7 @@
   "repository": "reactivestack/parcel-react-ssr",
   "scripts": {
     "dev": "npm run generate-imported-component && parcel app/index.html",
+    "dev-server": "nodemon -e js,jsx,html --ignore dist --ignore app/imported.js --exec 'npm run build && npm run start'",
     "build": "rimraf dist && npm run generate-imported-component && npm run build-client && npm run build-server",
     "build-client": "cross-env BABEL_ENV=client parcel build app/index.html -d dist/client --public-url /dist",
     "build-server": "cross-env BABEL_ENV=server parcel build server/index.js -d dist/server --public-url /dist --target=node6",
@@ -38,6 +39,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "node-sass": "^4.7.2",
+    "nodemon": "^1.17.3",
     "parcel-bundler": "^1.6.1",
     "react-hot-loader": "^4.0.0",
     "rimraf": "^2.6.2"
