@@ -3,7 +3,7 @@
 import React from 'react';
 import Helmet from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Wrapper, Title } from './components/Page';
+import { Wrapper, Title } from '../components/Page';
 
 export default () => (
   <div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet-async';
-import NyanCat from './codeSplitAssets/NyanCat';
 import styled from 'styled-components'
-import { Wrapper, Title } from './components/Page';
+import NyanCat from '../codeSplitAssets/NyanCat';
+import { Wrapper, Title } from '../components/Page';
 
 const NyanCatWrapper = styled.div`
   margin-bottom: 1em;

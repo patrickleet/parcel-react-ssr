@@ -6,13 +6,13 @@ import React from 'react';
 import importedComponent from 'react-imported-component';
 import Helmet from 'react-helmet-async';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Header from './Header';
+import Header from './components/Header';
 
 import './styles';
 
-import HelloWorld from './HelloWorld';
+import HelloWorld from './pages/HelloWorld';
 
-const HelloWorld2 = importedComponent(() => import('./HelloWorld2'));
+const HelloWorld2 = importedComponent(() => import('./pages/HelloWorld2'));
 
 export default function App() {
   return (
