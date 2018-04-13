@@ -3,7 +3,6 @@
 import fs from 'fs';
 import path from 'path';
 import cheerio from 'cheerio';
-import { Helmet } from 'react-helmet-async';
 
 // The path is relative from server bundle to client bundle, not the source
 const templatePath = path.join(__dirname, '..', 'client', 'index.html');

@@ -5,9 +5,7 @@ import express from 'express';
 import path from 'path';
 import ssr from './ssr';
 import favicon from '../app/favicon.ico';
-import pino from 'pino'
-
-const log = pino()
+import { log } from './logger'
 
 const app = express();
 

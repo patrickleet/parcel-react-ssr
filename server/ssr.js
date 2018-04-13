@@ -1,18 +1,17 @@
 // Middleware for the server-rendering
 
 import through from 'through';
-import path from 'path'
 import React from 'react';
-// import { getDataFromTree } from 'react-apollo';
 import { renderToNodeStream } from 'react-dom/server';
 import { HelmetProvider } from 'react-helmet-async';
 import { StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components'
-
 import App from '../app/App';
 import { pageData } from './pageData';
 import template from './template';
 import { printDrainHydrateMarks } from 'react-imported-component';
+import { log } from './logger'
+// import { getDataFromTree } from 'react-apollo';
 
 export default async (req, res) => {
   const context = {};
@@ -30,6 +29,7 @@ export default async (req, res) => {
   );
 
   try {
+    // If you were using Apollo, you could fetch data with this
     // await getDataFromTree(router);
 
     const sheet = new ServerStyleSheet()
@@ -38,15 +38,10 @@ export default async (req, res) => {
       renderToNodeStream(jsx)
     )
 
-    // const stream = renderToNodeStream(router)
-
     if (context.url) {
       res.redirect(301, context.url);
     } else {
-      // const { helmet } = helmetContext;
       const { src } = pageData
-
-      // console.log({title: helmetContext.title})
 
       const [header, footer] = template({
         drainHydrateMarks: printDrainHydrateMarks(),
@@ -69,7 +64,8 @@ export default async (req, res) => {
         .pipe(res)
     }
   } catch (e) {
-    console.log(e)
+    log.error(e)
+    res.status(500)
     res.end()
   }
 };
