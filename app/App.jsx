@@ -4,7 +4,7 @@
 
 import React from 'react';
 import importedComponent from 'react-imported-component';
-// import { Helmet } from 'react-helmet-async';
+import Helmet from 'react-helmet-async';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import './styles';
@@ -16,9 +16,10 @@ const HelloWorld2 = importedComponent(() => import('./HelloWorld2'));
 export default function App() {
   return (
     <div>
-      {/* <Helmet defaultTitle="Hello World!">
+      <Helmet>
+        <title>Hello World</title>
         <meta charSet="utf-8" />
-      </Helmet> */}
+      </Helmet>
       <Switch>
         <Route exact path="/" component={HelloWorld} />
         <Route exact path="/codeSplit" component={HelloWorld2} />

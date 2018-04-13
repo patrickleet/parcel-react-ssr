@@ -19,14 +19,14 @@ export default async (req, res) => {
   const helmetContext = {};
 
   const router = (
-
+    <HelmetProvider context={helmetContext}>
       <StaticRouter
         location={req.originalUrl}
         context={context}
       >
         <App />
       </StaticRouter>
-
+    </HelmetProvider>
   );
 
   try {

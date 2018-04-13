@@ -1,7 +1,7 @@
 // Dead simple component for the hello world (hi mom!)
 
 import React from 'react';
-// import { Helmet } from 'react-helmet-async';
+import Helmet from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -13,9 +13,9 @@ const Title = styled.h1`
 export default function HelloWorld() {
   return (
     <div>
-      {/* <Helmet>
-        <title>Not Hello World!</title>
-      </Helmet> */}
+      <Helmet>
+        <title>Hello World!</title>
+      </Helmet>
       <Title>Hello world!</Title>
       <p style={{ textAlign: 'center' }}>
       This is an ordinary react component.

@@ -11,10 +11,10 @@ import importedComponents from './imported'; // eslint-disable-line
 import { consolidateStreamedStyles } from 'styled-components'
 import App from './App';
 
-
+const helmetContext = {}
 const element = document.getElementById('app');
 const app = (
-  <HelmetProvider>
+  <HelmetProvider context={helmetContext}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
