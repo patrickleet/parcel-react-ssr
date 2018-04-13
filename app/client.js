@@ -5,17 +5,20 @@
 import { rehydrateMarks } from 'react-imported-component';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter } from 'react-router-dom';
 import importedComponents from './imported'; // eslint-disable-line
-
+import { consolidateStreamedStyles } from 'styled-components'
 import App from './App';
 
 
 const element = document.getElementById('app');
 const app = (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <HelmetProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </HelmetProvider>
 );
 
 // In production, we want to hydrate instead of render
@@ -23,6 +26,7 @@ const app = (
 if (process.env.NODE_ENV === 'production') {
   // rehydrate the bundle marks
   rehydrateMarks().then(() => {
+    consolidateStreamedStyles();
     ReactDOM.hydrate(app, element);
   });
 } else {

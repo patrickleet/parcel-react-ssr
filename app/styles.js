@@ -1,7 +1,6 @@
-import { injectGlobal } from 'styled-components';
+import { injectGlobal } from 'styled-components'
 
-injectGlobal`
-
+export default injectGlobal`
 :root {
   --light-text: #fff;
   --dark-text: rgba(0,0,0,.95);
@@ -531,5 +530,4 @@ input[type=text], input[type=email] {
     -webkit-transform: rotate(1turn);
   }
 }
-
 `

@@ -1,32 +1,75 @@
 // Middleware for the server-rendering
 
-import { printDrainHydrateMarks } from 'react-imported-component';
+import through from 'through';
+import path from 'path'
 import React from 'react';
-import ReactDOM from 'react-dom/server';
+// import { getDataFromTree } from 'react-apollo';
+import { renderToNodeStream } from 'react-dom/server';
+import { HelmetProvider } from 'react-helmet-async';
 import { StaticRouter } from 'react-router-dom';
+import { ServerStyleSheet } from 'styled-components'
 
 import App from '../app/App';
-import generateHtml from './generateHtml';
+import { pageData } from './generateHtml';
+import template from './template';
+import { printDrainHydrateMarks } from 'react-imported-component';
 
-export default (req, res) => {
-  // Generate the server-rendered HTML using the appropriate router
+export default async (req, res) => {
   const context = {};
-  const router = (
-    <StaticRouter 
-      location={req.originalUrl} 
-      context={context}
-    >
-      <App />
-    </StaticRouter>
-  );
-  const markup = ReactDOM.renderToNodeStream(router);
+  const helmetContext = {};
 
-  // If react-router is redirecting, do it on the server side
-  if (context.url) {
-    res.redirect(301, context.url);
-  } else {
-    // Format the HTML using the template and send the result
-    const html = generateHtml(markup + printDrainHydrateMarks());
-    res.stream(html);
+  const router = (
+
+      <StaticRouter
+        location={req.originalUrl}
+        context={context}
+      >
+        <App />
+      </StaticRouter>
+
+  );
+
+  try {
+    // await getDataFromTree(router);
+
+    const sheet = new ServerStyleSheet()
+    const jsx = sheet.collectStyles(router)
+    const stream = sheet.interleaveWithNodeStream(
+      renderToNodeStream(jsx)
+    )
+
+    // const stream = renderToNodeStream(router)
+
+    if (context.url) {
+      res.redirect(301, context.url);
+    } else {
+      // const { helmet } = helmetContext;
+      const { src } = pageData
+
+      // console.log({title: helmetContext.title})
+
+      const [header, footer] = template({
+        drainHydrateMarks: printDrainHydrateMarks(),
+        src
+      })
+      res.status(200)
+      res.write(header)
+      stream
+        .pipe(
+          through(
+            function write(data) {
+              this.queue(data)
+            },
+            function end() {
+              this.queue(footer)
+              this.queue(null)
+            }
+          )
+        )
+        .pipe(res)
+    }
+  } catch (e) {
+    console.log(e)
+    res.end()
   }
 };
