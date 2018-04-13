@@ -9,13 +9,7 @@ const templatePath = path.join(__dirname, '..', 'client', 'index.html');
 const HTML_TEMPLATE = fs.readFileSync(templatePath).toString();
 
 function generateData() {
-  // Get the server-rendering values for the <head />
-  // const helmet = Helmet.renderStatic();
-
   const $template = cheerio.load(HTML_TEMPLATE);
-  // $template('head').append(helmet.title.toString() + helmet.meta.toString() + helmet.link.toString());
-  // $template('#app').html(markup);
-
   let src = $template("#js-entrypoint").attr('src')
 
   return {
