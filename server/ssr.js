@@ -10,7 +10,7 @@ import { StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components'
 
 import App from '../app/App';
-import { pageData } from './generateHtml';
+import { pageData } from './pageData';
 import template from './template';
 import { printDrainHydrateMarks } from 'react-imported-component';
 

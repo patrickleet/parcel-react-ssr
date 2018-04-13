@@ -6,6 +6,7 @@ import React from 'react';
 import importedComponent from 'react-imported-component';
 import Helmet from 'react-helmet-async';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import Header from './Header';
 
 import './styles';
 
@@ -20,6 +21,7 @@ export default function App() {
         <title>Hello World</title>
         <meta charSet="utf-8" />
       </Helmet>
+      <Header />
       <Switch>
         <Route exact path="/" component={HelloWorld} />
         <Route exact path="/codeSplit" component={HelloWorld2} />

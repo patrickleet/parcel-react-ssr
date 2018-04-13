@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet-async';
 const templatePath = path.join(__dirname, '..', 'client', 'index.html');
 const HTML_TEMPLATE = fs.readFileSync(templatePath).toString();
 
-export default function generateData() {
+function generateData() {
   // Get the server-rendering values for the <head />
   // const helmet = Helmet.renderStatic();
 
