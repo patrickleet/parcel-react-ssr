@@ -1,14 +1,15 @@
 # parcel-react-ssr
 
-Simple example of how to do server-rendering. You will not believe how easy it is!
+Simple example of how to do streaming server-rendering. You will not believe how easy it is!
 
 Using:
 
 * parcel-bundler
 * react
 * react-router-dom
-* react-helmet (SEO)
+* react-helmet-async (SEO)
 * react-imported-component (Code Splitting)
+* styled-components (Streaming CSS-in-JS)
 
 Handy Extras
 
@@ -16,10 +17,14 @@ Handy Extras
 * eslint
 * [favicon example](server/index.js#16)
 * [Code split example](app/App.jsx#12)
+* [Relative Typography scale based on em's](app/styles.js#5)
+* [CSS Reset](app/styles.js#29)
+* ["system" font-family](app/styles.js#22)
 
 ## How to run
 
 * `npm run dev` - Run the development server with hot reload but no server-rendering
+* `npm run dev-server` - Run the server with nodemon to rebuild with every change
 * `npm run build` - Build for production, required before running
 * `npm start` - Start the production server
 
