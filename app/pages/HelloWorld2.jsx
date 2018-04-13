@@ -17,7 +17,7 @@ export default () => (
     <Wrapper>
       <div>
         <NyanCatWrapper>
-          <NyanCat />
+          <NyanCat stars={12} />
         </NyanCatWrapper>
         <Title>Hello world - Code Split!</Title>
         <p>
