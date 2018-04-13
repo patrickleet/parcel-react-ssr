@@ -1,4 +1,4 @@
-export default ({helmet, src, drainHydrateMarks}) => ([
+export default ({ src, drainHydrateMarks }) => ([
   `<!DOCTYPE html>
   <html>
     <head>
