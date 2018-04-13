@@ -5,6 +5,9 @@ import express from 'express';
 import path from 'path';
 import ssr from './ssr';
 import favicon from '../app/favicon.ico';
+import pino from 'pino'
+
+const log = pino()
 
 const app = express();
 
@@ -25,5 +28,5 @@ app.get('/*', ssr);
 // Check for PORT environment variable, otherwise fallback on Parcel default port
 const port = process.env.PORT || 1234;
 app.listen(port, () => {
-  console.log(`Listening on port ${port}...`);
+  log.info(`Listening on port ${port}...`);
 });
