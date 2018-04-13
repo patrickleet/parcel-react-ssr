@@ -3,23 +3,7 @@
 import React from 'react';
 import Helmet from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-
-import styled from 'styled-components';
-
-const Title = styled.h1`
-  font-size: var(--step-up-5);
-  margin-bottom: .5em;
-`
-
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  text-align: center;
-`
+import { Wrapper, Title } from './components/Page';
 
 export default () => (
   <div>

@@ -51,4 +51,15 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+/* Links */
+a {
+  text-decoration: underline;
+  color: #000;
+
+  &.active {
+    text-decoration: none;
+  }
+}
+
 `

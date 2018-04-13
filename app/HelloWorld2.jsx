@@ -1,41 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet-async';
-import './codeSplitAssets/NyanCat.scss';
-import Go from './codeSplitAssets/NyanCat';
+import NyanCat from './codeSplitAssets/NyanCat';
+import styled from 'styled-components'
+import { Wrapper, Title } from './components/Page';
 
-export default class Nyan extends Component {
-  componentDidMount() {
-    Go();
-  }
+const NyanCatWrapper = styled.div`
+  margin-bottom: 1em;
+`
 
-  render() {
-    return (
+export default () => (
+  <div>
+    <Helmet>
+      <title>Code Split</title>
+    </Helmet>
+    <Wrapper>
       <div>
-        <Helmet>
-          <title>Code Split</title>
-        </Helmet>
-        <h1 className="hello-world">Hello world 2!</h1>
-        <p style={{ textAlign: 'center' }}>
-                This is a code-split component.
+        <NyanCatWrapper>
+          <NyanCat />
+        </NyanCatWrapper>
+        <Title>Hello world - Code Split!</Title>
+        <p>
+          This is an code-split react component.
           <br />
           <Link to="/">Click here</Link> to see an ordinary component.
         </p>
-        <div className="wrapper">
-          <div className="rainbow">
-            <span />
-          </div>
-          <div className="nyan-cat">
-            <div className="feet" />
-            <div className="tail">
-              <span />
-            </div>
-            <div className="body" />
-            <div className="head" />
-          </div>
-          <div className="stars" />
-        </div>
       </div>
-    );
-  }
-}
+    </Wrapper>
+  </div>
+)

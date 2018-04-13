@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom';
 
 const Header = styled.header`
   font-size: 1rem;
@@ -31,14 +32,25 @@ const Menu = styled.ul`
 
 const MenuLink = styled.li`
   margin-left: 2em;
+  text-decoration: none;
 `
 
 export default () => (
   <Header>
     <Brand>parcel-react-ssr</Brand>
     <Menu>
-      <MenuLink>Home</MenuLink>
-      <MenuLink>Code Split</MenuLink>
+      <MenuLink>
+        <NavLink 
+          to="/"
+          exact activeClassName="active"
+        >Home</NavLink>
+      </MenuLink>
+      <MenuLink>
+        <NavLink 
+          to="/codeSplit" 
+          exact activeClassName="active"
+        >Code Split</NavLink>
+      </MenuLink>
     </Menu>
   </Header>
 )
