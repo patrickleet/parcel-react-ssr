@@ -2,7 +2,6 @@ import { injectGlobal } from 'styled-components'
 
 export default injectGlobal`
 :root {
-  
   /* Type Scale */
   /* https://blog.envylabs.com/responsive-typographic-scales-in-css-b9f60431d1c4 */
   --step-up-5: 2em;

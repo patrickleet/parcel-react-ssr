@@ -13,7 +13,7 @@ import { printDrainHydrateMarks } from 'react-imported-component';
 import { log } from './logger'
 // import { getDataFromTree } from 'react-apollo';
 
-export default async (req, res) => {
+export default (req, res) => {
   const context = {};
   const helmetContext = {};
 
