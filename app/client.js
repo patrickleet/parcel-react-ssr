@@ -10,6 +10,7 @@ import importedComponents from './imported'; // eslint-disable-line
 
 import App from './App';
 
+
 const element = document.getElementById('app');
 const app = (
   <BrowserRouter>

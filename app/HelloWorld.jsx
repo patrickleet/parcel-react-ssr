@@ -3,7 +3,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import './HelloWorld.scss';
+
+import styled from 'styled-components';
+
+const Title = styled.h1`
+  font-size: var(--step-up-5)
+`
 
 export default function HelloWorld() {
   return (
@@ -11,7 +16,7 @@ export default function HelloWorld() {
       <Helmet>
         <title>Hello World!</title>
       </Helmet>
-      <h1 className="hello-world">Hello world!</h1>
+      <Title>Hello world!</Title>
       <p style={{ textAlign: 'center' }}>
       This is an ordinary react component.
         <br />

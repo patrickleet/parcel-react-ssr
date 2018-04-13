@@ -3,7 +3,7 @@
 import compression from 'compression';
 import express from 'express';
 import path from 'path';
-import middleware from './middleware';
+import ssr from './ssr';
 import favicon from '../app/favicon.ico';
 
 const app = express();
@@ -20,7 +20,7 @@ app.use('/dist', express.static(`${__dirname}/../client`));
 
 // Anything unresolved is serving the application and let
 // react-router do the routing!
-app.get('/*', middleware);
+app.get('/*', ssr);
 
 // Check for PORT environment variable, otherwise fallback on Parcel default port
 const port = process.env.PORT || 1234;

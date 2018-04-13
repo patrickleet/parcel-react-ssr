@@ -11,8 +11,15 @@ import generateHtml from './generateHtml';
 export default (req, res) => {
   // Generate the server-rendered HTML using the appropriate router
   const context = {};
-  const router = <StaticRouter location={req.originalUrl} context={context}><App /></StaticRouter>;
-  const markup = ReactDOM.renderToString(router);
+  const router = (
+    <StaticRouter 
+      location={req.originalUrl} 
+      context={context}
+    >
+      <App />
+    </StaticRouter>
+  );
+  const markup = ReactDOM.renderToNodeStream(router);
 
   // If react-router is redirecting, do it on the server side
   if (context.url) {
@@ -20,6 +27,6 @@ export default (req, res) => {
   } else {
     // Format the HTML using the template and send the result
     const html = generateHtml(markup + printDrainHydrateMarks());
-    res.send(html);
+    res.stream(html);
   }
 };
