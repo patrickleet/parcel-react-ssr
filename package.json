@@ -12,10 +12,13 @@
   "license": "MIT",
   "repository": "reactivestack/parcel-react-ssr",
   "scripts": {
+    "prepare-legacy": "cp -f .legacy.babelrc .babelrc",
+    "prepare-modern": "cp -f .modern.babelrc .babelrc",
     "dev": "npm run generate-imported-component && parcel app/index.html",
     "dev-server": "nodemon -e js,jsx,html --ignore dist --ignore app/imported.js --exec 'npm run build && npm run start'",
-    "build": "rimraf dist && npm run generate-imported-component && npm run build-client && npm run build-server",
-    "build-client": "cross-env BABEL_ENV=client parcel build app/index.html -d dist/client --public-url /dist",
+    "build": "rimraf dist && npm run prepare-modern && npm run generate-imported-component && npm run build-client && npm run build-server && npm run prepare-legacy && npm run build-client-legacy && npm run prepare-modern",
+    "build-client": "cross-env BABEL_ENV=client parcel build app/index.html -d dist/clients/client --public-url /dist/clients/client",
+    "build-client-legacy": "cross-env BABEL_ENV=client parcel build app/index.html -d dist/clients/legacy-client --public-url /dist/clients/legacy-client",
     "build-server": "cross-env BABEL_ENV=server parcel build server/index.js -d dist/server --public-url /dist --target=node6",
     "generate-imported-component": "imported-components app app/imported.js",
     "start": "node dist/server",
@@ -23,8 +26,9 @@
     "lint:fix": "eslint --fix app server"
   },
   "dependencies": {
+    "browserslist-useragent": "^2.0.1",
     "cheerio": "^1.0.0-rc.2",
-    "compression": "^1.7.2",
+    "compression": "^1.7.3",
     "express": "^4.16.3",
     "pino": "^5.0.2",
     "react": "^16.3.1",
@@ -38,6 +42,8 @@
   "devDependencies": {
     "babel-eslint": "^8.2.2",
     "babel-plugin-dynamic-import-node": "^2.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "cross-env": "^5.1.4",
     "eslint": "^5.3.0",
     "eslint-plugin-import": "^2.11.0",

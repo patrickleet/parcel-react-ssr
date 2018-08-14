@@ -7,11 +7,40 @@ import { HelmetProvider } from 'react-helmet-async';
 import { StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components'
 import App from '../app/App';
-import { pageData } from './pageData';
+import clientData from './clientData';
 import template from './template';
 import { printDrainHydrateMarks } from 'react-imported-component';
 import { log } from './logger'
+import UA from 'browserslist-useragent'
 // import { getDataFromTree } from 'react-apollo';
+
+const { src, legacySrc } = clientData
+
+export const isModernBrowser = (userAgent) => {
+  return UA.matchesUA(userAgent, {
+    _allowHigherVersions: true,
+    browsers: [
+      "Chrome >= 66",
+      "Safari >= 11.1",
+      "iOS >= 11.3",
+      "Firefox >= 60",
+      "Edge >= 17"
+    ]
+  })
+}
+
+export const getClientJS = (req) => {
+  const userAgent = req.headers['user-agent']
+  let srcForUserAgent = legacySrc
+
+  if (isModernBrowser(userAgent)) {
+    log.info('is modern browser')
+    srcForUserAgent = src
+  }
+
+  log.info({msg: `request for JS lib received. Redirecting to ${srcForUserAgent}`, srcForUserAgent })
+  return srcForUserAgent
+}
 
 export default (req, res) => {
   const context = {};
@@ -41,7 +70,7 @@ export default (req, res) => {
     if (context.url) {
       res.redirect(301, context.url);
     } else {
-      const { src } = pageData
+      const src = getClientJS(req)
 
       const [header, footer] = template({
         drainHydrateMarks: printDrainHydrateMarks(),

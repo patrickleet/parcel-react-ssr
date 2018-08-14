@@ -6,23 +6,25 @@
     "client": {
       "presets": [
         ["env", {
-          "modules": false,
-          "useBuiltIns": true,
           "targets": {
             "browsers": [
-              "Chrome >= 66",
-              "Safari >= 11.1",
-              "iOS >= 11.3",
-              "Firefox >= 60",
-              "Edge >= 17"
+              "> 1%",
+              "last 2 versions",
+              "Firefox ESR"
             ]
           }
         }]
       ],
       "plugins": [
-        ["transform-object-rest-spread", { "useBuiltIns": true }],
+        ["transform-object-rest-spread"],
+        ["transform-runtime", {
+          "polyfill": true,
+          "regenerator": true
+        }],
         ["react-imported-component/babel"]
       ]
     }
   }
 }
+
+
