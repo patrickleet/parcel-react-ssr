@@ -54,7 +54,7 @@ img {
 /* Links */
 a {
   text-decoration: underline;
-  color: #000;
+  color: inherit;
 
   &.active {
     text-decoration: none;
