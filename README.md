@@ -20,6 +20,7 @@ Handy Extras
 * [Relative Typography scale based on em's](app/styles.js#5)
 * [CSS Reset](app/styles.js#29)
 * ["system" font-family](app/styles.js#22)
+* differential bundling - automatically serve modern bundles to modern browsers
 
 ## How to run
 
